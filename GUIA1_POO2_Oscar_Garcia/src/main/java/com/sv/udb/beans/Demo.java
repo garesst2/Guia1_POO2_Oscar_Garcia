@@ -14,4 +14,7 @@ public class Demo {
     public  Demo(){
         System.err.println("hola mundo");
 }
+    public String a(){
+        return "a";
+    }
 }
