@@ -75,10 +75,18 @@ public class Usua implements Serializable {
     public Usua() {
     }
 
-    public Usua(Long codiUsua) {
+    public Usua(Long codiUsua, String acceUsua, String contUsua, Date fechCambClavUsua, Date fechAlta, Date fechBaja, byte[] esta, Pers pers, List<Visi> visiList) {
         this.codiUsua = codiUsua;
+        this.acceUsua = acceUsua;
+        this.contUsua = contUsua;
+        this.fechCambClavUsua = fechCambClavUsua;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.pers = pers;
+        this.visiList = visiList;
     }
-
+    
     public Long getCodiUsua() {
         return codiUsua;
     }

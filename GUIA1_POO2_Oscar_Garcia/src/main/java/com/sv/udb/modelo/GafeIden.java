@@ -71,10 +71,17 @@ public class GafeIden implements Serializable {
     public GafeIden() {
     }
 
-    public GafeIden(Long codiGafeIden) {
+    public GafeIden(Long codiGafeIden, String nombGafeIden, String numeTipoGafe, Date fechAlta, Date fechBaja, byte[] esta, TipoGafe tipoGafe, List<Visi> visiList) {
         this.codiGafeIden = codiGafeIden;
+        this.nombGafeIden = nombGafeIden;
+        this.numeTipoGafe = numeTipoGafe;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.tipoGafe = tipoGafe;
+        this.visiList = visiList;
     }
-
+    
     public Long getCodiGafeIden() {
         return codiGafeIden;
     }

@@ -92,10 +92,24 @@ public class Visi implements Serializable {
     public Visi() {
     }
 
-    public Visi(Long codiVisi) {
+    public Visi(Long codiVisi, BigInteger codiPersVisi, Date fechHoraEntrVisi, Date fechHoraSaliVisi, String motiVisi, Date fechAlta, Date fechBaja, byte[] esta, GafeIden gafeIden, LugaAcce lugaAcce, LugaAcce lugaAcce1, PersHist persHist, Usua usua, TipoDocu tipoDocu, UnidOrga unidOrga) {
         this.codiVisi = codiVisi;
+        this.codiPersVisi = codiPersVisi;
+        this.fechHoraEntrVisi = fechHoraEntrVisi;
+        this.fechHoraSaliVisi = fechHoraSaliVisi;
+        this.motiVisi = motiVisi;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.gafeIden = gafeIden;
+        this.lugaAcce = lugaAcce;
+        this.lugaAcce1 = lugaAcce1;
+        this.persHist = persHist;
+        this.usua = usua;
+        this.tipoDocu = tipoDocu;
+        this.unidOrga = unidOrga;
     }
-
+    
     public Long getCodiVisi() {
         return codiVisi;
     }

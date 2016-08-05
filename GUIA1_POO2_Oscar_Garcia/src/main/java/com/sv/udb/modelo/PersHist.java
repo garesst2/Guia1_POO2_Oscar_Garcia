@@ -78,10 +78,19 @@ public class PersHist implements Serializable {
     public PersHist() {
     }
 
-    public PersHist(Long codiPersHist) {
+    public PersHist(Long codiPersHist, String nombPers, String apelPers, BigInteger codiUbicGeog, Date fechAlta, Date fechBaja, byte[] esta, Pers pers, TipoPers tipoPers, List<Visi> visiList) {
         this.codiPersHist = codiPersHist;
+        this.nombPers = nombPers;
+        this.apelPers = apelPers;
+        this.codiUbicGeog = codiUbicGeog;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.pers = pers;
+        this.tipoPers = tipoPers;
+        this.visiList = visiList;
     }
-
+    
     public Long getCodiPersHist() {
         return codiPersHist;
     }

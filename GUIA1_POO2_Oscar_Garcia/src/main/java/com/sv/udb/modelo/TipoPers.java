@@ -64,10 +64,16 @@ public class TipoPers implements Serializable {
     public TipoPers() {
     }
 
-    public TipoPers(Long codiTipoPers) {
+    public TipoPers(Long codiTipoPers, String nombTipoPers, Date fechAlta, Date fechBaja, byte[] esta, List<Pers> persList, List<PersHist> persHistList) {
         this.codiTipoPers = codiTipoPers;
+        this.nombTipoPers = nombTipoPers;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.persList = persList;
+        this.persHistList = persHistList;
     }
-
+    
     public Long getCodiTipoPers() {
         return codiTipoPers;
     }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f506724-b054-44f1-a702-f31e49e1e864">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="31556f2d-7db8-490c-b27e-090523c7189a"/>
+	<parameter name="Codigo_Visita" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     d.CODI_VISI,
+     d.`CODI_UNID_ORGA_VISI`,
+     u.`NOMB_UNID_ORGA`,
+     t.`NOMB_LUGA_ACCE`,
+     tt.`NOMB_LUGA_ACCE` as `NOMB_LUGA_Sali`
+FROM
+     `visi` d INNER JOIN `unid_orga` u ON d.`CODI_UNID_ORGA_VISI` = u.`CODI_UNID_ORGA`
+     INNER JOIN `luga_acce` t ON d.`CODI_LUGA_ENTR` = t.`CODI_LUGA_ACCE`
+     INNER JOIN `luga_acce` tt ON d.`CODI_LUGA_SALI` = tt.`CODI_LUGA_ACCE`
+WHERE
+     d.CODI_UNID_ORGA_VISI = $P{Codigo_Visita}]]>
+	</queryString>
+	<field name="CODI_VISI" class="java.lang.Long">
+		<fieldDescription><![CDATA[CODIGO DE LA VISITA]]></fieldDescription>
+	</field>
+	<field name="CODI_UNID_ORGA_VISI" class="java.lang.Long">
+		<fieldDescription><![CDATA[UNIDAD ORGANIZATIVA QUE RECIBE LA VISITA]]></fieldDescription>
+	</field>
+	<field name="NOMB_UNID_ORGA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMB_LUGA_ACCE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMB_LUGA_Sali" class="java.lang.String"/>
+	<variable name="Titulo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="223" y="20" width="337" height="39" uuid="652bdb62-e956-451a-a2a9-a731c09acd46"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMB_UNID_ORGA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="20" width="191" height="39" uuid="31fc37c5-6199-4545-822b-a7d26bb7cb85"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Lista de visitas de]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="463" height="26" uuid="a09d7571-3e36-48a7-aa85-72959b311585"/>
+				<text><![CDATA[Los datos mostrados en este reporte son parte de la lista de visita de la unidad organizadora antes mencionado con código :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="14" width="100" height="22" uuid="898e0842-aeb4-4412-aa1b-be07b5ecef63"/>
+				<textFieldExpression><![CDATA[$F{CODI_VISI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="18" width="100" height="20" uuid="31879518-108e-4df5-a985-9ceb43972505"/>
+				<text><![CDATA[Código Visita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="18" width="100" height="20" uuid="868e5c9f-11d1-410f-88d0-65a4b9d48144"/>
+				<text><![CDATA[Lugar de Acceso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="18" width="100" height="20" uuid="d60a3938-ab70-4f4b-a067-e839e6d40ff6"/>
+				<text><![CDATA[Lugar Salida]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="37" width="543" height="1" uuid="664cb4d9-f717-44be-8bcc-44c8a861c434"/>
+			</line>
+			<line>
+				<reportElement x="0" y="37" width="543" height="1" uuid="664cb4d9-f717-44be-8bcc-44c8a861c434"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="0" width="100" height="20" uuid="8e0025e4-2c7f-48a6-85e1-0961f2747392"/>
+				<textFieldExpression><![CDATA[$F{CODI_VISI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="100" height="20" uuid="d06314d4-1413-448d-ae2e-4577e549fec4"/>
+				<textFieldExpression><![CDATA[$F{NOMB_LUGA_ACCE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="0" width="100" height="20" uuid="354176a4-e852-4a73-95ba-9dcc47281356"/>
+				<textFieldExpression><![CDATA[$F{NOMB_LUGA_Sali}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="543" height="1" uuid="fa736034-d071-4862-8fc9-5378f436cb17"/>
+			</line>
+			<line>
+				<reportElement x="163" y="0" width="1" height="20" uuid="5e84d1c0-c27a-4967-89f6-6bb3808b8907"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="5" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -69,10 +69,17 @@ public class UbicGeog implements Serializable {
     public UbicGeog() {
     }
 
-    public UbicGeog(Long codiUbicGeog) {
+    public UbicGeog(Long codiUbicGeog, String nombUbicGeog, Date fechAlta, Date fechBaja, byte[] esta, List<UnidOrga> unidOrgaList, List<UbicGeog> ubicGeogList, UbicGeog ubicGeog) {
         this.codiUbicGeog = codiUbicGeog;
+        this.nombUbicGeog = nombUbicGeog;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.unidOrgaList = unidOrgaList;
+        this.ubicGeogList = ubicGeogList;
+        this.ubicGeog = ubicGeog;
     }
-
+    
     public Long getCodiUbicGeog() {
         return codiUbicGeog;
     }

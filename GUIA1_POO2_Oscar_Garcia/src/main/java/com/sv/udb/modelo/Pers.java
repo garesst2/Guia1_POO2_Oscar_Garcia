@@ -96,10 +96,24 @@ public class Pers implements Serializable {
     public Pers() {
     }
 
-    public Pers(Long codiPers) {
+    public Pers(Long codiPers, String nombPers, String apelPers, Character genePers, Date fechNaciPers, String duiPers, String nitPers, String tipoSangPers, BigInteger codiUbicGeog, Date fechAlta, Date fechBaja, byte[] esta, TipoPers tipoPers, List<Usua> usuaList, List<PersHist> persHistList) {
         this.codiPers = codiPers;
+        this.nombPers = nombPers;
+        this.apelPers = apelPers;
+        this.genePers = genePers;
+        this.fechNaciPers = fechNaciPers;
+        this.duiPers = duiPers;
+        this.nitPers = nitPers;
+        this.tipoSangPers = tipoSangPers;
+        this.codiUbicGeog = codiUbicGeog;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.tipoPers = tipoPers;
+        this.usuaList = usuaList;
+        this.persHistList = persHistList;
     }
-
+    
     public Long getCodiPers() {
         return codiPers;
     }

@@ -70,9 +70,16 @@ public class EquiComp implements Serializable {
     public EquiComp() {
     }
 
-    public EquiComp(Long codiEquiComp) {
+    public EquiComp(Long codiEquiComp, String nombEquiCom, String macAddrEquiComp, String ipAddrEquiComp, Date fechAlta, Date fechBaja, byte[] esta, LugaAcce lugaAcce) {
         this.codiEquiComp = codiEquiComp;
-    }
+        this.nombEquiCom = nombEquiCom;
+        this.macAddrEquiComp = macAddrEquiComp;
+        this.ipAddrEquiComp = ipAddrEquiComp;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.lugaAcce = lugaAcce;
+    }    
 
     public Long getCodiEquiComp() {
         return codiEquiComp;

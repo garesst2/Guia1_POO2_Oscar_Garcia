@@ -66,10 +66,17 @@ public class LugaAcce implements Serializable {
     public LugaAcce() {
     }
 
-    public LugaAcce(Long codiLugaAcce) {
+    public LugaAcce(Long codiLugaAcce, String nombLugaAcce, Date fechAlta, Date fechBaja, byte[] esta, List<EquiComp> equiCompList, List<Visi> visiList, List<Visi> visiList1) {
         this.codiLugaAcce = codiLugaAcce;
+        this.nombLugaAcce = nombLugaAcce;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.equiCompList = equiCompList;
+        this.visiList = visiList;
+        this.visiList1 = visiList1;
     }
-
+    
     public Long getCodiLugaAcce() {
         return codiLugaAcce;
     }

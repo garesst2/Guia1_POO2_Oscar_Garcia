@@ -96,10 +96,24 @@ public class UnidOrga implements Serializable {
     public UnidOrga() {
     }
 
-    public UnidOrga(Long codiUnidOrga) {
+    public UnidOrga(Long codiUnidOrga, String nombUnidOrga, String siglUnidOrga, String direUnidOrga, String teleUnidOrga, String faxUnidOrga, String emaiUnidOrga, String contUnidOrga, Date fechAlta, Date fechBaja, byte[] esta, UbicGeog ubicGeog, List<UnidOrga> unidOrgaList, UnidOrga unidOrga, List<Visi> visiList) {
         this.codiUnidOrga = codiUnidOrga;
+        this.nombUnidOrga = nombUnidOrga;
+        this.siglUnidOrga = siglUnidOrga;
+        this.direUnidOrga = direUnidOrga;
+        this.teleUnidOrga = teleUnidOrga;
+        this.faxUnidOrga = faxUnidOrga;
+        this.emaiUnidOrga = emaiUnidOrga;
+        this.contUnidOrga = contUnidOrga;
+        this.fechAlta = fechAlta;
+        this.fechBaja = fechBaja;
+        this.esta = esta;
+        this.ubicGeog = ubicGeog;
+        this.unidOrgaList = unidOrgaList;
+        this.unidOrga = unidOrga;
+        this.visiList = visiList;
     }
-
+    
     public Long getCodiUnidOrga() {
         return codiUnidOrga;
     }
