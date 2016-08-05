@@ -3,10 +3,19 @@
     Created on : 04-ago-2016, 19:27:09
     Author     : oscar
 --%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="com.lowagie.text.html.HtmlTags"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="net.sf.jasperreports.engine.JasperRunManager"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.io.File"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page import="com.sv.udb.controlador.UnidOrgaCtrl"%>
+<%@page import="com.sv.udb.recursos.Conexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
@@ -57,7 +66,7 @@
                                                     <div class="large-9 column">
                                                         <jsp:useBean id="beanUnidOrgnCtrl" class="com.sv.udb.controlador.UnidOrgaCtrl" scope="page"/>
                                                         <label>Selecciona la unidas organizativa
-                                                            <select>
+                                                            <select id="cbb1">
                                                                 <c:forEach items="${beanUnidOrgnCtrl.consTodo()}" var="fila">
                                                                     <option value="${fila.codiUnidOrga}">${fila.nombUnidOrga}</option>
                                                                 </c:forEach>                                                                
@@ -66,8 +75,11 @@
                                                     </div>
                                                     <div class="large-3 column">
                                                         <label style="color:white">s</label>
-                                                        <button type="button" class="success button">Buscar</button>
+                                                        <button id="boton1" type="button" class="success button">Buscar</button>
                                                     </div>
+                                                </div>
+                                                <div class="row" id="tabla1">
+
                                                 </div>
                                             </div>
                                             <div class="tabs-panel" id="panel2">
@@ -94,5 +106,16 @@
         <script src="js/vendor/what-input.js"></script>
         <script src="js/vendor/foundation.js"></script>
         <script src="js/app.js"></script>
+        <script type=text/javascript>
+            $('document').ready(function ()
+            {
+                $("#boton1").click(function () {
+                    $id = $("#cbb1").val();
+                    $("#tabla1").empty();
+                    $("#tabla1").append('<object data="reporte1?txt=' + $id + '" type="application/pdf" width="100%" height="100%"></object> ');
+                    $("#tabla1").append("<a href=reporte1?txt=" + $id + ">Ver en pantalla completa</a>");
+                });
+            });
+        </script>
     </body>
 </html>
