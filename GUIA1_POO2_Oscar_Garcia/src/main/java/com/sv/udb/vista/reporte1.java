@@ -56,13 +56,14 @@ public class reporte1 extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         Connection cn = new Conexion().getConn();
-        try {
-            File reportfile = new File(this.getClass().getClassLoader().getResource("Visitas.jasper").getPath());
+        if (request.getParameter("txt") != null) {
+            try {
+                File reportfile = new File(this.getClass().getClassLoader().getResource("Visitas.jasper").getPath());
 
-            Map<String, Object> parameters = new HashMap<String, Object>();
+                Map<String, Object> parameters = new HashMap<String, Object>();
 
-            String valor = request.getParameter("txt");
-            parameters.put("Codigo_Visita", valor);
+                String valor = request.getParameter("txt");
+                parameters.put("Codigo_Visita", valor);
 //            String ba = JasperRunManager.runReportToHtmlFile(reportfile.getPath(), parameters, cn);
 //            File reportHtmlFile = new File(ba);
 //            FileInputStream fis = new FileInputStream(reportHtmlFile);
@@ -75,26 +76,115 @@ public class reporte1 extends HttpServlet {
 //            outputstream.write(bytes, 0, bytes.length);
 //            outputstream.flush();
 //            outputstream.close();
-            byte[] bytes = JasperRunManager.runReportToPdf(reportfile.getPath(), parameters, cn);
+                byte[] bytes = JasperRunManager.runReportToPdf(reportfile.getPath(), parameters, cn);
 
-            response.setContentType("application/pdf");
-            response.setContentLength(bytes.length);
-            ServletOutputStream outputstream = response.getOutputStream();
-            outputstream.write(bytes, 0, bytes.length);
+                response.setContentType("application/pdf");
+                response.setContentLength(bytes.length);
+                ServletOutputStream outputstream = response.getOutputStream();
+                outputstream.write(bytes, 0, bytes.length);
 
-            outputstream.flush();
-            outputstream.close();
+                outputstream.flush();
+                outputstream.close();
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            if (cn != null) {
-                try {
-                    if (cn.isClosed()) {
-                        cn.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                if (cn != null) {
+                    try {
+                        if (cn.isClosed()) {
+                            cn.close();
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
                     }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                }
+            }
+        } else if (request.getParameter("persona") != null) {
+            try {
+                File reportfile = new File(this.getClass().getClassLoader().getResource("Personas.jasper").getPath());
+
+                Map<String, Object> parameters = new HashMap<String, Object>();
+
+                String valor = request.getParameter("persona");
+                parameters.put("Persona", valor);
+//            String ba = JasperRunManager.runReportToHtmlFile(reportfile.getPath(), parameters, cn);
+//            File reportHtmlFile = new File(ba);
+//            FileInputStream fis = new FileInputStream(reportHtmlFile);
+//            byte[] bytes = new byte[(int) reportHtmlFile.length()];
+//            fis.read(bytes);
+//            response.setHeader("Content-Disposition", "inline; filename=myReport.html");
+//            response.setContentType("text/html");
+//            response.setContentLength(bytes.length);
+//            ServletOutputStream outputstream = response.getOutputStream();
+//            outputstream.write(bytes, 0, bytes.length);
+//            outputstream.flush();
+//            outputstream.close();
+                byte[] bytes = JasperRunManager.runReportToPdf(reportfile.getPath(), parameters, cn);
+
+                response.setContentType("application/pdf");
+                response.setContentLength(bytes.length);
+                ServletOutputStream outputstream = response.getOutputStream();
+                outputstream.write(bytes, 0, bytes.length);
+
+                outputstream.flush();
+                outputstream.close();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                if (cn != null) {
+                    try {
+                        if (cn.isClosed()) {
+                            cn.close();
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }else if (request.getParameter("fecha1") != null && request.getParameter("fecha2") != null) {
+            try {
+                File reportfile = new File(this.getClass().getClassLoader().getResource("Fechas.jasper").getPath());
+
+                Map<String, Object> parameters = new HashMap<String, Object>();
+
+                String valor = request.getParameter("fecha1");
+                String valor2 = request.getParameter("fecha2");
+                parameters.put("Fecha1", valor);
+                parameters.put("Fecha2", valor2);
+//            String ba = JasperRunManager.runReportToHtmlFile(reportfile.getPath(), parameters, cn);
+//            File reportHtmlFile = new File(ba);
+//            FileInputStream fis = new FileInputStream(reportHtmlFile);
+//            byte[] bytes = new byte[(int) reportHtmlFile.length()];
+//            fis.read(bytes);
+//            response.setHeader("Content-Disposition", "inline; filename=myReport.html");
+//            response.setContentType("text/html");
+//            response.setContentLength(bytes.length);
+//            ServletOutputStream outputstream = response.getOutputStream();
+//            outputstream.write(bytes, 0, bytes.length);
+//            outputstream.flush();
+//            outputstream.close();
+                byte[] bytes = JasperRunManager.runReportToPdf(reportfile.getPath(), parameters, cn);
+
+                response.setContentType("application/pdf");
+                response.setContentLength(bytes.length);
+                ServletOutputStream outputstream = response.getOutputStream();
+                outputstream.write(bytes, 0, bytes.length);
+
+                outputstream.flush();
+                outputstream.close();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                if (cn != null) {
+                    try {
+                        if (cn.isClosed()) {
+                            cn.close();
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         }

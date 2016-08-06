@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fechas" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91ff584f-4af3-4415-abfe-81ee97b18ca7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="26"/>
+	<parameter name="Fecha1" class="java.lang.String"/>
+	<parameter name="Fecha2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     d.`CODI_UNID_ORGA_VISI`,
+     u.`NOMB_UNID_ORGA`,
+     t.`NOMB_LUGA_ACCE`,
+     tt.`NOMB_LUGA_ACCE` as `NOMB_LUGA_Sali`,
+     p.NOMB_PERS,
+     date(d.FECH_HORA_ENTR_VISI) as fecha
+
+FROM
+     `visi` d INNER JOIN `unid_orga` u ON d.`CODI_UNID_ORGA_VISI` = u.`CODI_UNID_ORGA`
+     INNER JOIN `luga_acce` t ON d.`CODI_LUGA_ENTR` = t.`CODI_LUGA_ACCE`
+     INNER JOIN `luga_acce` tt ON d.`CODI_LUGA_SALI` = tt.`CODI_LUGA_ACCE`
+     INNER JOIN pers p on p.CODI_PERS = d.CODI_PERS where
+     d.FECH_HORA_ENTR_VISI >= $P{Fecha1} and d.FECH_HORA_ENTR_VISI <= $P{Fecha2}]]>
+	</queryString>
+	<field name="CODI_UNID_ORGA_VISI" class="java.lang.Long">
+		<fieldDescription><![CDATA[UNIDAD ORGANIZATIVA QUE RECIBE LA VISITA]]></fieldDescription>
+	</field>
+	<field name="NOMB_UNID_ORGA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMB_LUGA_ACCE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMB_LUGA_Sali" class="java.lang.String"/>
+	<field name="NOMB_PERS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date"/>
+	<group name="Unidad Organizativa">
+		<groupExpression><![CDATA[$F{CODI_UNID_ORGA_VISI}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<textField>
+					<reportElement x="302" y="0" width="100" height="20" uuid="5a731d55-1e58-49c6-aec3-42893e2da65f"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NOMB_UNID_ORGA}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="86" y="0" width="203" height="20" uuid="af064764-c982-44f2-89c8-66234328ce0a"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre unidad Organizativa:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="186" y="18" width="202" height="40" uuid="1b83138d-1869-475f-80b4-b3513f5df927"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Visitas por Unidad Organizativa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="151" y="59" width="35" height="20" uuid="02c82b22-9d39-4a8c-b6d0-21008dc5fb52"/>
+				<text><![CDATA[Desde]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="186" y="59" width="60" height="20" uuid="0082553a-68cc-4584-8239-dae03056837a"/>
+				<textFieldExpression><![CDATA[$P{Fecha1}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="246" y="59" width="29" height="20" uuid="840152f8-a492-4839-b163-174bcf183d18"/>
+				<text><![CDATA[Hasta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="275" y="59" width="100" height="20" uuid="f39c9564-73c1-4727-a0dc-0b7a7725c3e7"/>
+				<textFieldExpression><![CDATA[$P{Fecha2}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="147" y="13" width="326" height="31" uuid="4b07cd19-0518-400c-9904-caa5029027a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Este reporte muestra todas las visitas que han tenido cada una de las unidades organizativas filtradas por fechas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="151" y="13" width="100" height="20" uuid="135ed68d-c114-4172-857a-62a6718fe2ce"/>
+				<text><![CDATA[Lugar de Acceso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="13" width="100" height="20" uuid="3b917849-ba94-453c-9b4e-b3c191f938d4"/>
+				<text><![CDATA[Lugar de Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="100" height="20" uuid="ad4c3901-fc54-4668-8cb7-444324901c21"/>
+				<text><![CDATA[Nombre del visitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="13" width="100" height="20" uuid="66f45520-7f25-467a-9644-f7d29c361c11"/>
+				<text><![CDATA[Fecha de Visita]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="151" y="11" width="100" height="20" uuid="dc37783a-0b6e-4e84-a259-86682e461531"/>
+				<textFieldExpression><![CDATA[$F{NOMB_LUGA_ACCE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="11" width="100" height="20" uuid="d5bcbd55-1af1-4305-84e4-5bcbc58aedd4"/>
+				<textFieldExpression><![CDATA[$F{NOMB_LUGA_Sali}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="11" width="100" height="20" uuid="f7d16b8f-9162-4daa-9765-6eea8b9c5cc9"/>
+				<textFieldExpression><![CDATA[$F{NOMB_PERS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="11" width="100" height="20" uuid="90923d08-db94-478e-8123-77b170985788"/>
+				<textFieldExpression><![CDATA[$F{fecha}.toString()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="31" width="572" height="1" uuid="3d9a609c-61b7-4cda-b649-c4be307dda88"/>
+			</line>
+			<line>
+				<reportElement x="0" y="10" width="572" height="1" uuid="32b105c5-b8d2-414d-ac26-c246ad116f97"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
