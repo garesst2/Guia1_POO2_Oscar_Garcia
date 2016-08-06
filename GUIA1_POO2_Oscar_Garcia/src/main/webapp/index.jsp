@@ -41,7 +41,6 @@
                         <div class="medium-3 columns">
                             <ul class="tabs vertical" id="contenido" data-tabs>
                                 <li class="tabs-title is-active"><a href="#panel3v" aria-selected="true">Reportes</a></li>
-                                <li class="tabs-title"><a href="#panel4v">Tab 4</a></li>
                             </ul>
                         </div>
                         <div class="medium-9 columns">
@@ -142,13 +141,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tabs-panel" id="panel4v">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                                <div class="tabs-panel" id="panel5v">
-                                </div>
-                                <div class="tabs-panel" id="panel6v">
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -168,13 +160,15 @@
                     $id = $("#cbb1").val();
                     $("#tabla1").empty();
                     $("#tabla1").append('<div><object data="reporte1?txt=' + $id + '" type="application/pdf" width="100%" height="100%"></object></div>');
-                    $("#tabla1").append('<a href="reporte1?txt=' + $id + '" target="_blank">Ver en pestaña nueva</a>');
+                    $("#tabla1").append('<div class="large-4 column"><a href="reporte1?txt=' + $id + '" target="_blank">Ver en pestaña nueva como PDF</a></div>');
+                    $("#tabla1").append('<div class="large-4 column"><a href="reporte1?txthtml=' + $id + '" target="_blank">Ver en pestaña nueva como HTML</a></div>');
                 });
                 $("#boton2").click(function () {
                     $id = $("#cbb2").val();
                     $("#tabla2").empty();
                     $("#tabla2").append('<div><object data="reporte1?persona=' + $id + '" type="application/pdf" width="100%" height="100%"></object></div>');
-                    $("#tabla2").append('<a href="reporte1?persona=' + $id + '" target="_blank">Ver en pestaña nueva</a>');
+                    $("#tabla2").append('<div class="large-4 column"><a href="reporte1?persona=' + $id + '" target="_blank">Ver en pestaña nueva como PDF</a></div>');
+                    $("#tabla2").append('<div class="large-4 column"><a href="reporte1?personahtml=' + $id + '" target="_blank">Ver en pestaña nueva como HTML</a></div>');
                 });
                 $("#boton3").click(function () {
                     $id = $("#cbb2").val();
@@ -182,12 +176,13 @@
                     $fechas2 = $.format.date($("#fecha2").val(), "yyyy/MM/dd");
                     $("#tabla3").empty();
                     $("#tabla3").append('<div><object data="reporte1?fecha1=' + $fechas1 + '&fecha2=' + $fechas2 + '" type="application/pdf" width="100%" height="100%"></object></div>');
-                    $("#tabla3").append('<a href="reporte1?fecha1=' + $fechas1 + '&fecha2=' + $fechas2 + '" target="_blank">Ver en pestaña nueva</a>');
+                    $("#tabla3").append('<div class="large-4 column"><a href="reporte1?fecha1=' + $fechas1 + '&fecha2=' + $fechas2 + '" target="_blank">Ver en pestaña nueva como PDF</a></div>');
+                    $("#tabla3").append('<div class="large-4 column"><a href="reporte1?fecha1html=' + $fechas1 + '&fecha2html=' + $fechas2 + '" target="_blank">Ver en pestaña nueva como HTML</a></div>');
                 });
                 $("#boton4").click(function () {
                     $("#tabla4").empty();
                     $("#tabla4").append('<div><object data="reporte1?text=f" type="application/pdf" width="100%" height="100%"></object></div>');
-                    $("#tabla4").append('<a href="reporte1?text=2" target="_blank">Ver en pestaña nueva</a>');
+                    $("#tabla4").append('<a href="reporte1?text=2" target="_blank">Ver en pestaña nueva como PDF</a>');
                 });
             });
         </script>

@@ -218,8 +218,8 @@ public class reporte1 extends HttpServlet {
 
                     PdfPTable tabla = new PdfPTable(3);
                     tabla.addCell("Código Persona");
-                        tabla.addCell("Nombre");
-                        tabla.addCell("Apellido");
+                    tabla.addCell("Nombre");
+                    tabla.addCell("Apellido");
                     for (Pers temp : new PersCtrl().consTodo()) {
                         tabla.addCell(String.valueOf(temp.getCodiPers()));
                         tabla.addCell(temp.getNombPers());
@@ -228,6 +228,107 @@ public class reporte1 extends HttpServlet {
                     documento.add(tabla);
                     documento.close();
 
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    if (cn != null) {
+                        try {
+                            if (cn.isClosed()) {
+                                cn.close();
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            } else if (request.getParameter("txthtml") != null) {
+                try {
+                    File reportfile = new File(this.getClass().getClassLoader().getResource("Visitas.jasper").getPath());
+
+                    Map<String, Object> parameters = new HashMap<String, Object>();
+
+                    String valor = request.getParameter("txthtml");
+                    parameters.put("Codigo_Visita", valor);
+                    String ba = JasperRunManager.runReportToHtmlFile(reportfile.getPath(), parameters, cn);
+                    File reportHtmlFile = new File(ba);
+                    FileInputStream fis = new FileInputStream(reportHtmlFile);
+                    byte[] bytes = new byte[(int) reportHtmlFile.length()];
+                    fis.read(bytes);
+                    response.setHeader("Content-Disposition", "inline; filename=myReport.html");
+                    response.setContentType("text/html");
+                    response.setContentLength(bytes.length);
+                    ServletOutputStream outputstream = response.getOutputStream();
+                    outputstream.write(bytes, 0, bytes.length);
+                    outputstream.flush();
+                    outputstream.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    if (cn != null) {
+                        try {
+                            if (cn.isClosed()) {
+                                cn.close();
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            } else if (request.getParameter("personahtml") != null) {
+                try {
+                    File reportfile = new File(this.getClass().getClassLoader().getResource("Personas.jasper").getPath());
+
+                    Map<String, Object> parameters = new HashMap<String, Object>();
+
+                    String valor = request.getParameter("personahtml");
+                    parameters.put("Persona", valor);
+                    String ba = JasperRunManager.runReportToHtmlFile(reportfile.getPath(), parameters, cn);
+                    File reportHtmlFile = new File(ba);
+                    FileInputStream fis = new FileInputStream(reportHtmlFile);
+                    byte[] bytes = new byte[(int) reportHtmlFile.length()];
+                    fis.read(bytes);
+                    response.setHeader("Content-Disposition", "inline; filename=myReport.html");
+                    response.setContentType("text/html");
+                    response.setContentLength(bytes.length);
+                    ServletOutputStream outputstream = response.getOutputStream();
+                    outputstream.write(bytes, 0, bytes.length);
+                    outputstream.flush();
+                    outputstream.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    if (cn != null) {
+                        try {
+                            if (cn.isClosed()) {
+                                cn.close();
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            } else if (request.getParameter("fecha1html") != null && request.getParameter("fecha2html") != null) {
+                try {
+                    File reportfile = new File(this.getClass().getClassLoader().getResource("Fechas.jasper").getPath());
+
+                    Map<String, Object> parameters = new HashMap<String, Object>();
+
+                    String valor = request.getParameter("fecha1html");
+                    String valor2 = request.getParameter("fecha2html");
+                    parameters.put("Fecha1", valor);
+                    parameters.put("Fecha2", valor2);
+                    String ba = JasperRunManager.runReportToHtmlFile(reportfile.getPath(), parameters, cn);
+                    File reportHtmlFile = new File(ba);
+                    FileInputStream fis = new FileInputStream(reportHtmlFile);
+                    byte[] bytes = new byte[(int) reportHtmlFile.length()];
+                    fis.read(bytes);
+                    response.setHeader("Content-Disposition", "inline; filename=myReport.html");
+                    response.setContentType("text/html");
+                    response.setContentLength(bytes.length);
+                    ServletOutputStream outputstream = response.getOutputStream();
+                    outputstream.write(bytes, 0, bytes.length);
+                    outputstream.flush();
+                    outputstream.close();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
