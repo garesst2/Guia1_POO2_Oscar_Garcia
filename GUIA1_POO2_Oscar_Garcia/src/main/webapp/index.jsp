@@ -40,7 +40,7 @@
                     <div class="row collapse">
                         <div class="medium-3 columns">
                             <ul class="tabs vertical" id="contenido" data-tabs>
-                                <li class="tabs-title is-active"><a href="#panel3v" aria-selected="true">Tab 3</a></li>
+                                <li class="tabs-title is-active"><a href="#panel3v" aria-selected="true">Reportes</a></li>
                                 <li class="tabs-title"><a href="#panel4v">Tab 4</a></li>
                             </ul>
                         </div>
@@ -61,6 +61,7 @@
                                             <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Visitas Unidades Organizativas</a></li>
                                             <li class="tabs-title"><a href="#panel2">Visitas de Personas</a></li>
                                             <li class="tabs-title"><a href="#panel3">Visitas de unidad organizativa segun fecha</a></li>
+                                            <li class="tabs-title"><a href="#panel4">Lista de Persona -Itext</a></li>
                                         </ul>
                                         <div class="tabs-content" data-tabs-content="contenido-tabla">
                                             <div class="tabs-panel is-active" id="panel1">
@@ -109,12 +110,12 @@
                                                 <div class="row">
                                                     <div class="large-9 column">
                                                         <label>Selecciona el rango de fechas </label>                                              
-                                                            <div class="large-5 column">
-                                                                <input type="date" id="fecha1">
-                                                            </div>
-                                                            <div class="large-5 column">
-                                                                <input type="date" id="fecha2">
-                                                            </div>                                                        
+                                                        <div class="large-5 column">
+                                                            <input type="date" id="fecha1">
+                                                        </div>
+                                                        <div class="large-5 column">
+                                                            <input type="date" id="fecha2">
+                                                        </div>                                                        
                                                     </div>
                                                     <div class="large-3 column">
                                                         <label style="color:white">s</label>
@@ -125,6 +126,19 @@
 
                                                 </div>
                                             </div>
+                                            <div class="tabs-panel" id="panel4">
+                                                <div class="row">
+                                                    <div class="large-9 column">
+                                                        <label>Reporte hecho con Itext sobre lista de usuarios</label>                                              
+                                                    </div>
+                                                    <div class="large-3 column">
+                                                        <button id="boton4" type="button" class="success button">Mostrar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="tabla4">
+
+                                                </div>
+                                            </div>            
                                         </div>
                                     </div>
                                 </div>
@@ -167,8 +181,13 @@
                     $fechas1 = $.format.date($("#fecha1").val(), "yyyy/MM/dd");
                     $fechas2 = $.format.date($("#fecha2").val(), "yyyy/MM/dd");
                     $("#tabla3").empty();
-                    $("#tabla3").append('<div><object data="reporte1?fecha1=' + $fechas1 + '&fecha2='+ $fechas2 +'" type="application/pdf" width="100%" height="100%"></object></div>');
-                    $("#tabla3").append('<a href="reporte1?fecha1=' + $fechas1 + '&fecha2='+ $fechas2 +'" target="_blank">Ver en pestaña nueva</a>');
+                    $("#tabla3").append('<div><object data="reporte1?fecha1=' + $fechas1 + '&fecha2=' + $fechas2 + '" type="application/pdf" width="100%" height="100%"></object></div>');
+                    $("#tabla3").append('<a href="reporte1?fecha1=' + $fechas1 + '&fecha2=' + $fechas2 + '" target="_blank">Ver en pestaña nueva</a>');
+                });
+                $("#boton4").click(function () {
+                    $("#tabla4").empty();
+                    $("#tabla4").append('<div><object data="reporte1?text=f" type="application/pdf" width="100%" height="100%"></object></div>');
+                    $("#tabla4").append('<a href="reporte1?text=2" target="_blank">Ver en pestaña nueva</a>');
                 });
             });
         </script>

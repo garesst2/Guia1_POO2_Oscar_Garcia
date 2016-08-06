@@ -5,6 +5,8 @@
  */
 package com.sv.udb.vista;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.sv.udb.recursos.Conexion;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +23,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperRunManager;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.sv.udb.controlador.PersCtrl;
+import com.sv.udb.modelo.Pers;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -142,7 +157,7 @@ public class reporte1 extends HttpServlet {
                     }
                 }
             }
-        }else if (request.getParameter("fecha1") != null && request.getParameter("fecha2") != null) {
+        } else if (request.getParameter("fecha1") != null && request.getParameter("fecha2") != null) {
             try {
                 File reportfile = new File(this.getClass().getClassLoader().getResource("Fechas.jasper").getPath());
 
@@ -184,6 +199,46 @@ public class reporte1 extends HttpServlet {
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();
+                    }
+                }
+            }
+        } else {
+            if (request.getParameter("text") != null) {
+                try {
+                    Document documento = new Document();
+                    PdfWriter.getInstance(documento, response.getOutputStream()).setInitialLeading(20);
+                    documento.open();
+
+                    documento.add(new Paragraph("Registro de Personas",
+                            FontFactory.getFont("arial", // fuente
+                                    22, // tamaño
+                                    Font.ITALIC, // estilo
+                                    BaseColor.BLACK)));             // color
+                    documento.add(new Phrase(Chunk.NEWLINE));
+
+                    PdfPTable tabla = new PdfPTable(3);
+                    tabla.addCell("Código Persona");
+                        tabla.addCell("Nombre");
+                        tabla.addCell("Apellido");
+                    for (Pers temp : new PersCtrl().consTodo()) {
+                        tabla.addCell(String.valueOf(temp.getCodiPers()));
+                        tabla.addCell(temp.getNombPers());
+                        tabla.addCell(temp.getApelPers());
+                    }
+                    documento.add(tabla);
+                    documento.close();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    if (cn != null) {
+                        try {
+                            if (cn.isClosed()) {
+                                cn.close();
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             }
